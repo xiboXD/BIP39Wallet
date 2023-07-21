@@ -1,0 +1,13 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2046
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{CSharpProjectTypeGUID}") = "BIP39.HDWallet", "src\BIP39.HDWallet.Core\BIP39.HDWallet.Core.csproj", "{11111111-1111-1111-1111-111111111111}"
+EndProject
+Project("{CSharpProjectTypeGUID}") = "BIP39.HDWallet.Core", "src\BIP39.HDWallet\BIP39.HDWallet.csproj", "{22222222-2222-2222-2222-222222222222}"
+EndProject
+Project("{CSharpProjectTypeGUID}") = "BIP39Wallet", "src\BIP39Wallet\BIP39Wallet.csproj", "{33333333-3333-3333-3333-333333333333}"
+EndProject
+Project("{CSharpProjectTypeGUID}") = "BIP39WalletTest", "test\BIP39WalletTest.csproj", "{33333333-3333-3333-3333-333333333333}"
+EndProject
