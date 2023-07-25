@@ -1,9 +1,17 @@
 using Xunit;
 using BIP39Wallet;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace BIP39Wallet.Tests
 {
+    public class MyData
+    {
+        public List<List<string>> English { get; set; }
+    }
+
     public class WalletTests
     {
         [Fact]
