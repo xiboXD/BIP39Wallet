@@ -10,6 +10,7 @@ using BIP39.HDWallet;
 using BIP39.HDWallet.Core;
 using AElf.Cryptography;
 using AElf;
+using AElf.Types;
 
 namespace BIP39Wallet
 {
@@ -158,7 +159,7 @@ namespace BIP39Wallet
         var keyPair = CryptoHelper.FromPrivateKey(wallet.PrivateKey);
         var privateKey = keyPair.PrivateKey.ToHex();
         var publicKey = keyPair.PublicKey.ToHex();
-        var address = wallet.Address.ToBase58();
+        var address =  Address.FromPublicKey(keyPair.PublicKey).ToString().Trim('\"');;
         return new BlockchainWallet(address, privateKey, mnemonic.ToString(), publicKey);
         }
     
@@ -177,7 +178,7 @@ namespace BIP39Wallet
         var keyPair = CryptoHelper.FromPrivateKey(wallet.PrivateKey);
         var privateKey = keyPair.PrivateKey.ToHex();
         var publicKey = keyPair.PublicKey.ToHex();
-        var address = wallet.Address.ToBase58();
+        var address =  Address.FromPublicKey(keyPair.PublicKey).ToString().Trim('\"');;
         
         return new BlockchainWallet(address, privateKey, mnemonic, publicKey);
     }
@@ -201,7 +202,8 @@ namespace BIP39Wallet
         Array.Resize(ref keybyte, 32);
         var keyPair = CryptoHelper.FromPrivateKey(keybyte);
         var publicKey = keyPair.PublicKey.ToHex();
-        return new BlockchainWallet(null, privateKey, null, publicKey);
+        var address =  Address.FromPublicKey(keyPair.PublicKey).ToString().Trim('\"');;
+        return new BlockchainWallet(address, privateKey, null, publicKey);
     }
 
 }}

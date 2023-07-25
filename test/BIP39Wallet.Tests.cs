@@ -11,8 +11,8 @@ namespace BIP39Wallet.Tests
         {
             // Arrange
             var wallet = new BIP39Wallet.Wallet();
-            var strength = 128; // 设置助记词强度（以比特位为单位）
-            var language = Language.English; // 设置助记词语言
+            var strength = 128; // Set mnemonic strength (in bits)
+            var language = Language.English; // Set mnemonic language
 
             // Act
             var accountInfo = wallet.CreateWallet(strength, language, null);
@@ -31,6 +31,7 @@ namespace BIP39Wallet.Tests
             Assert.NotNull(accountInfo);
             Assert.Equal("f0c3bf2cfc4f50405afb2f1236d653cf0581f4caedf4f1e0b49480c840659ba9", accountInfo.PrivateKey);
             Assert.Equal("04c0f6abf0e3122f4a49646d67bacf85c80ad726ca781ccba572033a31162f22e55a4a106760cbf1306f26c25aea1e4bb71ee66cb3c5104245d6040cce64546cc7", accountInfo.PublicKey);
+            Assert.Equal("2ihA5K7sSsA78gekyhuh7gcnX4JkGVqJmSGnf8Kj1hZefR4sX5", accountInfo.Address);
         }
 
         [Fact]
@@ -41,6 +42,7 @@ namespace BIP39Wallet.Tests
             var accountInfo = wallet.GetWalletByPrivateKey(privateKey);
             Assert.NotNull(accountInfo);
             Assert.Equal("04c0f6abf0e3122f4a49646d67bacf85c80ad726ca781ccba572033a31162f22e55a4a106760cbf1306f26c25aea1e4bb71ee66cb3c5104245d6040cce64546cc7", accountInfo.PublicKey);
+            Assert.Equal("2ihA5K7sSsA78gekyhuh7gcnX4JkGVqJmSGnf8Kj1hZefR4sX5", accountInfo.Address);
         }
     }
 }
