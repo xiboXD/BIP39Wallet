@@ -135,20 +135,6 @@ namespace BIP39Wallet
         return hex;
     }
 
-    public bool ValidateMnemonic(Mnemonic mnemonic)
-    {
-        try
-        {
-            ConvertMnemonicToEntropy(mnemonic);
-        }
-        catch (Exception)
-        {
-            return false;
-        }
-
-        return true;
-    }
-
     public BlockchainWallet CreateWallet(int strength, Language language, string password)
     {   
         var mnemonic = GenerateMnemonic(strength, language);

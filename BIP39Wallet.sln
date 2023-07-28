@@ -7,7 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIP39.HDWallet.Core", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIP39Wallet", "src\BIP39Wallet\BIP39Wallet.csproj", "{017585D2-3701-4005-826C-6B29E7B11414}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIP39Wallet.Tests", "test\BIP39Wallet.Tests.csproj", "{77300105-3B99-41B3-9DAE-F28578137876}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIP39Wallet.Tests", "test\BIP39Wallet.Test\BIP39Wallet.Tests.csproj", "{2437589B-6CFD-45F7-8FA9-F4BE7463DE9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIP39HDWallet.Tests", "test\BIP39HDWallet.Test\BIP39HDWallet.Tests.csproj", "{1B467441-A555-41A3-82C3-3813151A7EA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIP39HDWallet.Core", "test\BIP39HDWallet.Core.Test\BIP39HDWallet.Core.csproj", "{A3DE2030-527C-49B5-A654-DB75BF15BC9A}"
 EndProject
 Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution

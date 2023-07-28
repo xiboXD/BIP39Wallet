@@ -1,9 +1,5 @@
 using Xunit;
-using BIP39Wallet;
-using System;
 using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json;
 
 namespace BIP39Wallet.Tests
 {
@@ -18,7 +14,7 @@ namespace BIP39Wallet.Tests
         public void CreateWallet_ReturnsValidAccountInfo()
         {
             // Arrange
-            var wallet = new BIP39Wallet.Wallet();
+            var wallet = new Wallet();
             var strength = 128; // Set mnemonic strength (in bits)
             var language = Language.English; // Set mnemonic language
 
