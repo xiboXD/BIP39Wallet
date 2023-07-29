@@ -1,9 +1,9 @@
 using System;
 using AElf;
-using AElf.Cryptography;
 using AElf.Types;
 using BIP39.HDWallet;
 using BIP39.HDWallet.Core;
+using NBitcoin;
 using Xunit;
 
 namespace BIP39HDWallet.Core.Tests
@@ -31,10 +31,10 @@ namespace BIP39HDWallet.Core.Tests
             var masterWallet = new HDWallet<xBIP39Wallet>(seedHex, "m/44'/1616'");
             var account = masterWallet.GetAccount(0);
             var wallet = account.GetExternalWallet(0);
-            var keyPair = CryptoHelper.FromPrivateKey(wallet.PrivateKey);
-            var privateKey = keyPair.PrivateKey.ToHex();
-            var publicKey = keyPair.PublicKey.ToHex();
-            var address =  Address.FromPublicKey(keyPair.PublicKey).ToString().Trim('\"');
+            var key = new Key(wallet.PrivateKey, -1, false);
+            var privateKey = wallet.PrivateKey.ToHex();
+            var publicKey = key.PubKey.ToHex();
+            var address =  Address.FromPublicKey(key.PubKey.ToBytes()).ToString().Trim('\"');
             Assert.Equal("7d4a62f9d18324f4a2127ec1ead8192f3ce6a90ea6e05b3aff2ef37992115d36", privateKey);
             Assert.Equal("04010fe17376a8505942a3fa64159cf380f656c78d12310b377e378ca633f6f93c26cfbaafca18b3f95ebc67a464facaa6ebafef0fad91f72843233eea81296e96", publicKey);
             Assert.Equal("2fW7PaX69idNEv38B8aWQSGiZXAuVk4EBHoMW63fVyq3sMMFZi", address);

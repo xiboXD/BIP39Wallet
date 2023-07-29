@@ -6,11 +6,12 @@ using System.Security.Cryptography;
 using BIP39Wallet.Types;
 using BIP39Wallet.Extensions;
 using System.Text.RegularExpressions;
-using BIP39.HDWallet;
-using BIP39.HDWallet.Core;
-using AElf.Cryptography;
 using AElf;
 using AElf.Types;
+using BIP39.HDWallet;
+using BIP39.HDWallet.Core;
+using NBitcoin;
+using Mnemonic = BIP39Wallet.Types.Mnemonic;
 
 namespace BIP39Wallet
 {
@@ -142,11 +143,11 @@ namespace BIP39Wallet
         var masterWallet = new HDWallet<xBIP39Wallet>(seedHex, "m/44'/1616'");
         var account = masterWallet.GetAccount(0);
         var wallet = account.GetExternalWallet(0);
-        var keyPair = CryptoHelper.FromPrivateKey(wallet.PrivateKey);
-        var privateKey = keyPair.PrivateKey.ToHex();
-        var publicKey = keyPair.PublicKey.ToHex();
-        var address =  Address.FromPublicKey(keyPair.PublicKey).ToString().Trim('\"');;
-        return new BlockchainWallet(address, privateKey, mnemonic.ToString(), publicKey);
+        var key = new Key(wallet.PrivateKey, -1, false);
+        var privateKey = wallet.PrivateKey.ToHex();
+        var publicKey = key.PubKey;
+        var address =  Address.FromPublicKey(publicKey.ToBytes()).ToString().Trim('\"');
+        return new BlockchainWallet(address, privateKey, mnemonic.ToString(), publicKey.ToHex());
         }
     
 
@@ -161,12 +162,12 @@ namespace BIP39Wallet
         var masterWallet = new HDWallet<xBIP39Wallet>(seedHex, "m/44'/1616'");
         var account = masterWallet.GetAccount(0);
         var wallet = account.GetExternalWallet(0);
-        var keyPair = CryptoHelper.FromPrivateKey(wallet.PrivateKey);
-        var privateKey = keyPair.PrivateKey.ToHex();
-        var publicKey = keyPair.PublicKey.ToHex();
-        var address =  Address.FromPublicKey(keyPair.PublicKey).ToString().Trim('\"');;
+        var key = new Key(wallet.PrivateKey, -1, false);
+        var privateKey = wallet.PrivateKey.ToHex();
+        var publicKey = key.PubKey;
+        var address =  Address.FromPublicKey(publicKey.ToBytes()).ToString().Trim('\"');
         
-        return new BlockchainWallet(address, privateKey, mnemonic, publicKey);
+        return new BlockchainWallet(address, privateKey, mnemonic, publicKey.ToHex());
     }
 
        // Convert hex string to byte array
@@ -186,10 +187,26 @@ namespace BIP39Wallet
     {
         var keybyte = StringToByteArray(privateKey);
         Array.Resize(ref keybyte, 32);
-        var keyPair = CryptoHelper.FromPrivateKey(keybyte);
-        var publicKey = keyPair.PublicKey.ToHex();
-        var address =  Address.FromPublicKey(keyPair.PublicKey).ToString().Trim('\"');;
-        return new BlockchainWallet(address, privateKey, null, publicKey);
+        var key = new Key(keybyte, -1, false);
+        var publicKey = key.PubKey;
+        var address =  Address.FromPublicKey(publicKey.ToBytes()).ToString().Trim('\"');
+        return new BlockchainWallet(address, privateKey, null, publicKey.ToHex());
+    }
+
+    public byte[] Sign(byte[] privateKey, byte[] hash)
+    {
+        var hash32 = new uint256(hash);
+        Array.Resize(ref privateKey, 32);
+        var key = new Key(privateKey, -1, false);
+        var signature = key.SignCompact(hash32, false);
+        
+        var formattedSignature = new byte[65];
+        Array.Copy(signature[1..], 0, formattedSignature, 0, 64);
+        
+        var recoverId = (byte)(signature[0] - 27);
+        formattedSignature[64] = recoverId; //last byte holds the recoverId
+
+        return formattedSignature;
     }
 
 }}

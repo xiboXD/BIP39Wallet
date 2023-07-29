@@ -1,5 +1,4 @@
-using AElf.Cryptography;
-using AElf.Cryptography.ECDSA;
+using System;
 using AElf.Types;
 using NBitcoin;
 using NBitcoin.DataEncoders;
@@ -10,10 +9,23 @@ namespace BIP39.HDWallet.Core
     {
         public Key Key { get; set; }
         public Address Address => GenerateAddress();
-
-        public byte[] Sign(byte[] message)
+        
+        //TODO: write a unit test for this method
+        public byte[] Sign(byte[] hash)
         {
-            return CryptoHelper.SignWithPrivateKey(_privateKey, message);
+            var hash32 = new uint256(hash);
+            var privateKey = PrivateKey;
+            Array.Resize(ref privateKey, 32);
+            var key = new Key(privateKey, -1, false);
+            var signature = key.SignCompact(hash32, false);
+        
+            var formattedSignature = new byte[65];
+            Array.Copy(signature[1..], 0, formattedSignature, 0, 64);
+        
+            var recoverId = (byte)(signature[0] - 27);
+            formattedSignature[64] = recoverId; //last byte holds the recoverId
+
+            return formattedSignature;
         }
 
         private byte[] _privateKey;
@@ -43,8 +55,6 @@ namespace BIP39.HDWallet.Core
         }
 
         public uint Index { get; set; }
-
-        public ECKeyPair KeyPair { get; set; }
 
         protected abstract Address GenerateAddress();
     }

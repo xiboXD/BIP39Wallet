@@ -6,7 +6,7 @@ namespace BIP39.HDWallet.Core
     {
         Address Address { get; }
 
-        byte[] Sign(byte[] message);
+        public byte[] Sign(byte[] hash);
 
         public byte[] PrivateKey { get; set; }
 
