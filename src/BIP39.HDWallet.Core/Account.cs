@@ -1,12 +1,14 @@
+using System.Diagnostics.CodeAnalysis;
 using NBitcoin;
 
 namespace BIP39.HDWallet.Core
 {
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     public class Account<TWallet> : IAccount<TWallet> where TWallet : IWallet, new()
     {
         public uint AccountIndex { get; set; }
-        private ExtKey ExternalChain { get; set; }
-        private ExtKey InternalChain { get; set; }
+        private ExtKey ExternalChain { get;}
+        private ExtKey InternalChain { get;}
 
         public Account(uint accountIndex, ExtKey externalChain, ExtKey internalChain)
         {

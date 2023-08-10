@@ -1,6 +1,7 @@
 using System;
 using Xunit;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using BIP39.HDWallet.Core;
 
@@ -11,6 +12,7 @@ namespace BIP39Wallet.Tests
         public List<List<string>> English { get; set; }
     }
 
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class WalletTests
     {
         [Fact]
@@ -51,7 +53,7 @@ namespace BIP39Wallet.Tests
             var language = Language.English; // Set mnemonic language
 
             // Act
-            var accountInfo = wallet.CreateWallet(strength, language, null);
+            var accountInfo = wallet.CreateWallet(strength, language, "");
 
             // Assert
             Assert.NotNull(accountInfo);

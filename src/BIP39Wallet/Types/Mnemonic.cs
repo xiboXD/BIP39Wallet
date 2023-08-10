@@ -1,3 +1,4 @@
+#pragma warning disable CS8618
 namespace BIP39Wallet.Types
 {
     public class Mnemonic

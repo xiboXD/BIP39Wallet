@@ -1,5 +1,6 @@
 #pragma warning disable CS0618 // Type or member is obsolete
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Security.Cryptography;
@@ -12,12 +13,15 @@ using BIP39.HDWallet;
 using BIP39.HDWallet.Core;
 using NBitcoin;
 using Mnemonic = BIP39Wallet.Types.Mnemonic;
+#pragma warning disable CS0649
+#pragma warning disable CS8618
 
 namespace BIP39Wallet
 {
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     public class Wallet
     {
-    private readonly WalletWordlistProvider _wordlistProvider;
+    private readonly IWalletWordlistProvider _wordlistProvider;
 
     public class BlockchainWallet
     {
@@ -119,7 +123,7 @@ namespace BIP39Wallet
     {
         var mnemonicBytes = Encoding.UTF8.GetBytes(mnemonic.Value.Normalize(NormalizationForm.FormKD));
         var saltSuffix = string.Empty;
-        if (password != null && password != string.Empty)
+        if (!string.IsNullOrEmpty(password))
         {
             saltSuffix = password;
         }
@@ -140,7 +144,7 @@ namespace BIP39Wallet
     {   
         var mnemonic = GenerateMnemonic(strength, language);
         var seedHex = ConvertMnemonicToSeedHex(mnemonic, password);
-        var masterWallet = new HDWallet<xBIP39Wallet>(seedHex, "m/44'/1616'");
+        var masterWallet = new HDWallet<XBip39Wallet>(seedHex, "m/44'/1616'");
         var account = masterWallet.GetAccount(0);
         var wallet = account.GetExternalWallet(0);
         var key = new Key(wallet.PrivateKey, -1, false);
@@ -151,7 +155,7 @@ namespace BIP39Wallet
         }
     
 
-    public BlockchainWallet GetWalletByMnemonic(string mnemonic, string password = null)
+    public BlockchainWallet GetWalletByMnemonic(string mnemonic, string password = "")
     {
         var mnemonicValue = new Mnemonic
             {
@@ -159,7 +163,7 @@ namespace BIP39Wallet
                 Language = Language.English
             };
         var seedHex = ConvertMnemonicToSeedHex(mnemonicValue, password);
-        var masterWallet = new HDWallet<xBIP39Wallet>(seedHex, "m/44'/1616'");
+        var masterWallet = new HDWallet<XBip39Wallet>(seedHex, "m/44'/1616'");
         var account = masterWallet.GetAccount(0);
         var wallet = account.GetExternalWallet(0);
         var key = new Key(wallet.PrivateKey, -1, false);
@@ -190,7 +194,7 @@ namespace BIP39Wallet
         var key = new Key(keybyte, -1, false);
         var publicKey = key.PubKey;
         var address =  Address.FromPublicKey(publicKey.ToBytes()).ToString().Trim('\"');
-        return new BlockchainWallet(address, privateKey, null, publicKey.ToHex());
+        return new BlockchainWallet(address, privateKey, null!, publicKey.ToHex());
     }
 
     public byte[] Sign(byte[] privateKey, byte[] hash)

@@ -7,6 +7,6 @@ public interface IBip39Service
     Wallet.BlockchainWallet CreateWallet(int strength, Language language, string password);
     Mnemonic ConvertEntropyToMnemonic(Entropy entropy);
     Entropy ConvertMnemonicToEntropy(Mnemonic mnemonic);
-    string ConvertMnemonicToSeedHex(Mnemonic mnemonic, string password = null);
+    string ConvertMnemonicToSeedHex(Mnemonic mnemonic, string? password = null);
     bool ValidateMnemonic(Mnemonic mnemonic);
 }
