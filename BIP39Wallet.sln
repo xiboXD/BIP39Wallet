@@ -1,0 +1,19 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIP39.HDWallet", "src\BIP39.HDWallet\BIP39.HDWallet.csproj", "{D8321304-102F-496B-916B-51D9A836F7A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIP39.HDWallet.Core", "src\BIP39.HDWallet.Core\BIP39.HDWallet.Core.csproj", "{F9BA3545-19DA-46F7-814F-74F51D41020C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIP39Wallet", "src\BIP39Wallet\BIP39Wallet.csproj", "{017585D2-3701-4005-826C-6B29E7B11414}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIP39Wallet.Tests", "test\BIP39Wallet.Test\BIP39Wallet.Tests.csproj", "{2437589B-6CFD-45F7-8FA9-F4BE7463DE9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIP39.HDWallet.Core.Tests", "test\BIP39.HDWallet.Core.Test\BIP39.HDWallet.Core.Tests.csproj", "{6D976E4A-36B9-4123-89AE-6E6B09232DC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIP39.HDWallet.Tests", "test\BIP39.HDWallet.Test\BIP39.HDWallet.Tests.csproj", "{C35BE143-5B8B-4453-9762-E9D8F3D46058}"
+EndProject
+Global
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+	EndGlobalSection
+EndGlobal

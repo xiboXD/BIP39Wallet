@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFrameworks>net7.0;netstandard2.1</TargetFrameworks>
+        <RestoreSources>http://192.168.66.111:8081/repository/nuget-group/index.json</RestoreSources>
+        <RootNamespace>BIP39HDWallet.Core</RootNamespace>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\BIP39Wallet\BIP39Wallet.csproj" />
+        <ProjectReference Include="..\..\src\BIP39.HDWallet\BIP39.HDWallet.csproj" />
+        <ProjectReference Include="..\..\src\BIP39.HDWallet.Core\BIP39.HDWallet.Core.csproj" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
+        <PackageReference Include="xunit" Version="2.4.1" />
+        <PackageReference Include="xunit.runner.console" Version="2.4.1" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
+    </ItemGroup>
+</Project>

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net7.0;netstandard2.1</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="NBitcoin" Version="6.0.18" />
+    <PackageReference Include="AElf.Types" Version="1.3.1" />
+    <ProjectReference Include="..\BIP39.HDWallet\BIP39.HDWallet.csproj" />
+    <ProjectReference Include="..\BIP39.HDWallet.Core\BIP39.HDWallet.Core.csproj" />
+  </ItemGroup>
+</Project>
