@@ -2,6 +2,7 @@
     <PropertyGroup>
         <TargetFrameworks>net7.0;netstandard2.1</TargetFrameworks>
         <RestoreSources>http://192.168.66.111:8081/repository/nuget-group/index.json</RestoreSources>
+        <RootNamespace>BIP39HDWallet.Core</RootNamespace>
     </PropertyGroup>
     <ItemGroup>
         <ProjectReference Include="..\..\src\BIP39Wallet\BIP39Wallet.csproj" />
